@@ -8,7 +8,7 @@
 
 (function ($) {
   var pollId = window.location.href.match(/pollId=(\d*)/)[1],
-      pollDataPath = 'http://partners.sodahead.com//api/polls/' + pollId + '/?ext=geo-us&jsonp=window.setOpacities';
+      pollDataPath = 'http://partners.sodahead.com/api/polls/' + pollId + '/?ext=geo-us&jsonp=window.setOpacities';
 
   window.sumVotes = function () {
     return Array.prototype.slice.call(arguments, 0).reduce(function(prev, curr) {
@@ -24,11 +24,10 @@
   };
 
   window.setOpacities = function (data) {
-    console.log(data);
     var $regions = window.jQuery('[data-code]');
 
     $regions.each(function () {
-      var $this = window.jQuery(this),
+      var $this = $(this),
           code = $this.data('code').split('-'),
           codePrefix = code[0], 
           codeSuffix = code[1],
@@ -47,7 +46,6 @@
   };
 
   function getPollResults() {
-    console.log('poll request sent');
     $.getScript(pollDataPath);
   }
 
